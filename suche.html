@@ -95,8 +95,6 @@
             .setLatLng(e.latlng)
             .setContent("You clicked the map at " + e.latlng.toString() + "<br>The distance to the marker is: " + map.distance(e.latlng, marker.getLatLng()) + " m")
             .openOn(map);
-        
-        
         }
 
         map.on('click', onMapClick);
