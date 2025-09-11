@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>Standortsuche</title>
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+      <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+     <style>
+        #map { height: 600px; }
+
+        div {
+            font-family: Tahoma, Verdana, sans-serif;
+        }
+
+        .buttonR {
+            background-color: #f44336; /* Red */
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 10px;
+        }
+        .buttonG {
+            background-color: #04AA6D; /* Green */
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 10px;
+        }
+
+        .gebaeude{
+            margin-bottom: 10px;
+        }
+
+     </style>
+    </head>
+    <body>
+        <div><h1>Uni Salzburg</h1></div>
+        <div id="nav">
+            <div class="gebaeude">Nawi <div class="buttonR" onclick="map.removeLayer(nawi)">-</div> <div class="buttonG" onclick="map.addLayer(nawi)">+</div></div>
+            <div class="gebaeude">Unipark Nonntal <div class="buttonR" onclick="map.removeLayer(unipark_nonntal)">-</div> <div class="buttonG" onclick="map.addLayer(unipark_nonntal)">+</div></div>
+            <div class="gebaeude">Geswi <div class="buttonR" onclick="map.removeLayer(geswi)">-</div> <div class="buttonG" onclick="map.addLayer(geswi)">+</div></div>
+            <div class="gebaeude">Studiengebäude <div class="buttonR" onclick="map.removeLayer(studiengebaeude)">-</div> <div class="buttonG" onclick="map.addLayer(studiengebaeude)">+</div></div>
+        </div>
+        <div id="map"></div>
+             <script>
+        //Karte 
+        let map = L.map('map').setView([47.8,13.033333], 13);
+
+       //Basemap als Layer
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+     }).addTo(map);
+
+      //verschiedene Standorte
+     var nawi = L.marker([47.788698035838806, 13.060707859689483]).addTo(map);
+     nawi.bindPopup("Nawi");
+
+     var unipark_nonntal = L.marker([47.794859196706746, 13.054142762420605]).addTo(map);
+     unipark_nonntal.bindPopup("Unipark Nonntal");
+
+     var geswi = L.marker([47.79839053277815, 13.050307057031802]).addTo(map);
+      geswi.bindPopup("Geswi");
+
+     var studiengebaeude = L.marker([47.799255911856044, 13.041616673285635]).addTo(map);
+      studiengebaeude.bindPopup("Studiengebäude");
+
+     </script>
+    </body>
+</html>
