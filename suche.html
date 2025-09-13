@@ -75,7 +75,11 @@
             iconUrl: 'pink.png',
             iconSize: [10, 10]
             });
-        marker.setIcon(myIcon2);
+        
+        //Marker setzen, wenn nah genug dran
+        if (map.distance(e.latlng, marker.getLatLng()) < 100){
+            marker.setIcon(myIcon2);
+        }
 
         //Kreis mit Radius Distanz und Mittelpunkt Map-Klick
         let circle = L.circle(e.latlng, {
