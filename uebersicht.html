@@ -9,7 +9,7 @@
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
      <style>
-        #map { height: 600px; }
+        #map { height: 500px; }
 
         div {
             font-family: Tahoma, Verdana, sans-serif;
@@ -52,8 +52,29 @@
         <div id="status"></div>
         <div id="map"></div>
              <script>
+        //Zentrum
+        let Koordinaten = {
+          nawi: [47.788698035838806, 13.060707859689483],
+          unipark_nonntal: [47.794859196706746, 13.054142762420605],
+          geswi: [47.79839053277815, 13.050307057031802],
+          studiengebaeude: [47.799255911856044, 13.041616673285635]
+        }
+        let summel = 0;
+        let summeb = 0;
+        for (let [name, koordinate] of Object.entries(Koordinaten)){
+          summeb += koordinate[0];
+          summel += koordinate[1];
+          }
+
+          let b = summeb/Object.keys(Koordinaten).length;
+
+          let l = summel/Object.keys(Koordinaten).length;
+
+          console.log(b);
+          console.log(l);
+        
         //Karte 
-        let map = L.map('map').setView([47.8,13.033333], 14);
+        let map = L.map('map').setView([b,l], 15);
 
        //Basemap als Layer
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -62,16 +83,16 @@
      }).addTo(map);
 
       //verschiedene Standorte
-     var nawi = L.marker([47.788698035838806, 13.060707859689483]).addTo(map);
+     let nawi = L.marker(Koordinaten.nawi).addTo(map);
      nawi.bindPopup("Nawi");
 
-     var unipark_nonntal = L.marker([47.794859196706746, 13.054142762420605]).addTo(map);
+     let unipark_nonntal = L.marker(Koordinaten.unipark_nonntal).addTo(map);
      unipark_nonntal.bindPopup("Unipark Nonntal");
 
-     var geswi = L.marker([47.79839053277815, 13.050307057031802]).addTo(map);
+     let geswi = L.marker(Koordinaten.geswi).addTo(map);
       geswi.bindPopup("Geswi");
 
-     var studiengebaeude = L.marker([47.799255911856044, 13.041616673285635]).addTo(map);
+     let studiengebaeude = L.marker(Koordinaten.studiengebaeude).addTo(map);
       studiengebaeude.bindPopup("Studiengebäude");
 
     //Layer von Karte entfernen
