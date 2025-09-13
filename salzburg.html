@@ -43,9 +43,15 @@
     //Stadtteile als GeoJson
     const geojson = L.geoJson(stadtteile_salzburg, {attribution: '<a href="https://www.data.gv.at/katalog/datasets/0475194b-b6b2-42be-85e5-b57a1dc0d04a">OpenData Stadt Salzbug</a> - <a href="https://creativecommons.org/licenses/by/3.0/at/">CC BY 3.0 AT</a>'}).addTo(map);
     
+    //Struktur Pop-Up
     geojson.eachLayer((layer) => {
-	layer.bindPopup("Stadtteil: " + layer.feature.properties.STADTTEIL + " | " + "Ortsteil: " + layer.feature.properties.ORTSTEIL + " | " + "Landschaftsteil: " + layer.feature.properties.LANDSCHAFTSRAUM);
+	layer.bindPopup("Stadtteil: " + iStruktur(layer.feature.properties.STADTTEIL) + " | " + "Ortsteil: " + iStruktur(layer.feature.properties.ORTSTEIL) + " | " + "Landschaftsraum: " + iStruktur(layer.feature.properties.LANDSCHAFTSRAUM) + " | " + "Teillandschaftsraum: " + iStruktur(layer.feature.properties.TEILLANDSCHAFTSRAUM) + " | " + "Siedlung: " + iStruktur(layer.feature.properties.SIEDLUNG));
 	});
+
+    //Struktur
+    function iStruktur(Struktur){
+        return Struktur != null ? Struktur : " - ";
+    }
 
     //Layer Controll
     var baseMaps = {
