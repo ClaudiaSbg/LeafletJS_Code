@@ -45,10 +45,10 @@
     <body>
         <div><h1>Uni Salzburg</h1></div>
         <div id="nav">
-            <div class="gebaeude">Nawi <div class="buttonR" onclick="map.removeLayer(nawi)">-</div> <div class="buttonG" onclick="map.addLayer(nawi)">+</div></div>
-            <div class="gebaeude">Unipark Nonntal <div class="buttonR" onclick="map.removeLayer(unipark_nonntal)">-</div> <div class="buttonG" onclick="map.addLayer(unipark_nonntal)">+</div></div>
-            <div class="gebaeude">Geswi <div class="buttonR" onclick="map.removeLayer(geswi)">-</div> <div class="buttonG" onclick="map.addLayer(geswi)">+</div></div>
-            <div class="gebaeude">Studiengebäude <div class="buttonR" onclick="map.removeLayer(studiengebaeude)">-</div> <div class="buttonG" onclick="map.addLayer(studiengebaeude)">+</div></div>
+            <div class="gebaeude">Nawi <div class="buttonR" onclick="removeLayer(nawi);">-</div> <div class="buttonG" onclick="addLayer(nawi);">+</div></div>
+            <div class="gebaeude">Unipark Nonntal <div class="buttonR" onclick="removeLayer(unipark_nonntal);">-</div> <div class="buttonG" onclick="addLayer(unipark_nonntal);">+</div></div>
+            <div class="gebaeude">Geswi <div class="buttonR" onclick="removeLayer(geswi);">-</div> <div class="buttonG" onclick="addLayer(geswi);">+</div></div>
+            <div class="gebaeude">Studiengebäude <div class="buttonR" onclick="removeLayer(studiengebaeude);">-</div> <div class="buttonG" onclick="addLayer(studiengebaeude);">+</div></div>
         </div>
         <div id="map"></div>
              <script>
@@ -73,6 +73,16 @@
 
      var studiengebaeude = L.marker([47.799255911856044, 13.041616673285635]).addTo(map);
       studiengebaeude.bindPopup("Studiengebäude");
+
+    //Layer von Karte entfernen
+      function removeLayer(layer){
+        map.removeLayer(layer);
+      }
+
+       //Layer zu Karte hinzufügen
+      function addLayer(layer){
+        map.addLayer(layer);
+      }
 
      </script>
     </body>
