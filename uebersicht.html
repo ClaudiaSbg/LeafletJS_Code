@@ -36,19 +36,18 @@
             font-size: 10px;
         }
 
-        .gebaeude{
-            margin-bottom: 10px;
-        }
      </style>
      <!-- Test-->
     </head>
     <body>
         <div><h1>Uni Salzburg</h1></div>
         <div id="nav">
-            <div class="gebaeude">Nawi <div class="buttonR" id="nawiOff" onclick="removeLayer(nawi, 'nawiOff');">-</div> <div class="buttonG" id="nawiOn" onclick="addLayer(nawi, 'nawiOn');">+</div></div>
-            <div class="gebaeude">Unipark Nonntal <div class="buttonR" id="unipark_nonntalOff" onclick="removeLayer(unipark_nonntal, 'unipark_nonntalOff');">-</div> <div class="buttonG" id="unipark_nonntalOn"  onclick="addLayer(unipark_nonntal, 'unipark_nonntalOn');">+</div></div>
-            <div class="gebaeude">Geswi <div class="buttonR" id="geswiOff" onclick="removeLayer(geswi, 'geswiOff');">-</div> <div class="buttonG" id="geswiOn" onclick="addLayer(geswi, 'geswiOn');">+</div></div>
-            <div class="gebaeude">Studiengebäude <div class="buttonR" id="studiengebaeudeOff" onclick="removeLayer(studiengebaeude, 'studiengebaeudeOff');">-</div> <div class="buttonG" id="studiengebaeudeOn" onclick="addLayer(studiengebaeude, 'studiengebaeudeOn');">+</div></div>
+            <table>
+            <tr><td>Nawi </td><td><div class="buttonR" id="nawiOff" onclick="removeLayer(nawi, 'nawiOff');">-</div> <div class="buttonG" id="nawiOn" onclick="addLayer(nawi, 'nawiOn');">+</div></td></tr>
+            <tr><td>Unipark Nonntal </td><td><div class="buttonR" id="unipark_nonntalOff" onclick="removeLayer(unipark_nonntal, 'unipark_nonntalOff');">-</div> <div class="buttonG" id="unipark_nonntalOn"  onclick="addLayer(unipark_nonntal, 'unipark_nonntalOn');">+</div></td></tr>
+            <tr><td>Geswi </td><td><div class="buttonR" id="geswiOff" onclick="removeLayer(geswi, 'geswiOff');">-</div> <div class="buttonG" id="geswiOn" onclick="addLayer(geswi, 'geswiOn');">+</div></td></tr>
+            <tr><td>Studiengebäude </td><td><div class="buttonR" id="studiengebaeudeOff" onclick="removeLayer(studiengebaeude, 'studiengebaeudeOff');">-</div> <div class="buttonG" id="studiengebaeudeOn" onclick="addLayer(studiengebaeude, 'studiengebaeudeOn');">+</div></td></tr>
+            </table>
         </div>
         <div id="status"></div>
         <div id="map"></div>
@@ -90,7 +89,7 @@
     }
 
 
-    //Layer checken
+    //Layer checken und Button-Status-Farbe ändern
     function layerCheck(layer, layerName){
     if (map.hasLayer(layer)){
        document.getElementById(layerName + "On").style.backgroundColor = "grey";
