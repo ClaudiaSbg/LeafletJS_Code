@@ -24,12 +24,15 @@
 <div id="infos">
     <p>Center: <div id="center"></div>
     <p>Zoom: <div id="zoom"></div></p>
+    <p>Bounds: <div id="bounds"></div></p>
 </div>
 <script>
     //Zentrum
     let mCenter = [47.8,13.033333];
+    
     //Zoomfaktor
     let mZoom = 13;
+    
     //Anzeige Zentrum
     document.getElementById("center").innerHTML = mCenter;
 
@@ -58,13 +61,22 @@
         document.getElementById("zoom").innerHTML = mZoom;
     }
 
+    //Bounds ermitteln
+    function infoBounds(){
+        let cSouthWest = map.getBounds().getSouthWest();
+        let cNorthEast = map.getBounds().getNorthEast();
+        let cNorthWest = map.getBounds().getNorthWest();
+        let cSouthEast = map.getBounds().getSouthEast();
+        document.getElementById("bounds").innerHTML = "Southwest: " + cSouthWest.lat+","+ cSouthWest.lng + "<br> Northwest: " + cNorthWest.lat+","+ cNorthWest.lng + "<br>Northeast: " + cNorthEast.lat + "," + cNorthEast.lng + "<br> Southeast: " + cSouthEast.lat+","+ cSouthEast.lng;
+    }
+
     map.on('zoom', infoCenter);
     map.on('zoom', infoZoom);
-
+    map.on('zoom', infoBounds);
+    
     map.on('move', infoCenter);
     map.on('move', infoZoom);
-
-
+    map.on('move', infoBounds);
 </script>
 </body>
 </html>
