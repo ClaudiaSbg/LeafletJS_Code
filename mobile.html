@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
+	<meta http-equiv="refresh" content="30">
 	<style>
 		html, body {
 			height: 100%;
@@ -38,6 +38,9 @@
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
 
+	let nawi_brunnen = L.marker([47.788702355087878,13.060706238504592]).addTo(map);
+     nawi_brunnen.bindPopup("<strong>Nawi-Brunnen</strong><br>Brunnen im Innenhof der <a href=\"https://www.plus.ac.at/raumvermarktung/naturwissenschaftliche-fakultaet/\" target =\"_blank\">Nawi</a><br><img src=\"nawi_brunnen.jpg\" width=\"200\">");
+
 	function onLocationFound(e) {
 		const radius = e.accuracy / 2;
 
@@ -45,6 +48,10 @@
 			.bindPopup(`You are within ${radius} meters from this point`).openPopup();
 
 		const locationCircle = L.circle(e.latlng, radius).addTo(map);
+
+		if (map.distance(e.latlng, nawi_brunnen.getLatLng()) < 500){
+            nawi_brunnen.openPopup();;
+        }
 	}
 
 	function onLocationError(e) {
