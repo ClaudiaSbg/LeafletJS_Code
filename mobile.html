@@ -46,6 +46,14 @@
 	//Marker Rainer Obelisk
 	let rainer_obelisk = L.marker([47.7811666, 13.0489689],{title: 'Rainer Obelisk'}).addTo(map);
 	rainer_obelisk.bindPopup("<strong>Rainer Obelisk</strong>");
+
+	//Marker Weltkriegsdenkmal
+	let weltkriegsdenkmal = L.marker([47.778445846942752, 13.047404576216683],{title: 'Weltkriegsdenkmal'}).addTo(map);
+	weltkriegsdenkmal.bindPopup("<strong>Weltkriegsdenkmal</strong>");
+
+	//Marker Bücherzelle
+	let buecherzelle = L.marker([47.781106823686009, 13.049494380599686],{title: 'Bücherzelle'}).addTo(map);
+	buecherzelle.bindPopup("<strong>Bücherzelle</strong>");
 	
 	//Ortungsfunktion
 	 function onLocationFound(e) {
@@ -63,9 +71,19 @@
             nawi_brunnen.openPopup();
         }
 
-		//entfernung zu Rainer Obelisk
+		//Entfernung zu Rainer Obelisk
 		if (map.distance(e.latlng, rainer_obelisk.getLatLng()) < 500){
             rainer_obelisk.openPopup();
+        }
+
+		//Entfernung zum Weltkriegsdenkmal
+		if (map.distance(e.latlng, weltkriegsdenkmal.getLatLng()) < 500){
+            weltkriegsdenkmal.openPopup();
+        }
+
+		//Entfernung zur Bücherzelle
+		if (map.distance(e.latlng, buecherzelle.getLatLng()) < 500){
+            buecherzelle.openPopup();
         }
 
 	let textInfoA = [];
