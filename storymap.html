@@ -1,0 +1,149 @@
+<html>
+<head>
+    <title>Storymap</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+<style>
+    .side_map{
+        height: 400px; 
+        width: 600px;
+        float: left;
+        margin: 10px;
+    }
+    .side_text{
+        float: left;
+    }
+
+    .img_side{
+        width: 100px;
+        margin-right: 5px;
+    }
+
+    section{
+        margin-bottom: 50px;
+        display:block;
+    }
+
+    .clear{
+        clear:both;
+    }
+</style>
+</head>
+<body>
+<header><h1>Alterbach</h1></header>
+<nav></nav>
+<section class="clear">
+<div id="map1" class="side_map"></div>
+<div clas="side_text">
+    <h2>Alterbach Ursprung</h2>
+    <p>Der Ursprung des Alterbachs befindet sich in Koppl.</p>
+    <a href="img/alterbach_ursprung.png" target="_blank"><img class="img_side" src="img/alterbach_ursprung.png"></a>
+</div>
+</section>
+
+<section class="clear">
+<div id="map2" class="side_map"></div>
+<div class="side_text">
+    <h2>Alterbach Oberlauf</h2>
+    <p>Im Oberlauf fließt er zwischen Heuberg und Gaisberg durch und hat mehrere kleine Zufl&uuml;sse. Dort ist er teilweise nicht verbaut und teilweise aber realtiv stark.</p>
+    <a href="img/alterbach_oberlauf.png" target="_blank"><img class="img_side" src="img/alterbach_oberlauf.png"></a>
+    <a href="img/alterbach_kaskaden.png" target="_blank"><img class="img_side" src="img/alterbach_kaskaden.png"></a>
+</div>
+</section>
+
+<section class="clear">
+<div id="map3" class="side_map"></div>
+<div class="side_text">
+    <h2>Alterbach Obergnigl</h2>
+    <p>In Obergnigl verl&auml;uft der Bach in einem gepflasterten Bett.</p>
+</div>
+</section>
+
+<section class="clear">
+<div id="map4" class="side_map"></div>
+<div class="side_text"><h2>Alterbach Mittellauf</h2>
+    <p>Im Mittellauf ist er weniger reguliert aber von bebauten bzw. bewirtschafteten Fl&auml;chen umgeben. Es f&uuml;hrt ein Weg entlang. Dort flie&szlig;t auch der S&ouml;llheimer Bach zu.</p>
+    <a href="img/alterbach_mittellauf.png" target="_blank"><img class="img_side" src="img/alterbach_mittellauf.png"></a>
+    <a href="img/alterbach_soelheimerbach.png" target="_blank"><img class="img_side" src="img/alterbach_soelheimerbach.png"></a>
+    <p>In diesem Bereich gibt es auch einige Stockenten.</p>
+    <a href="img/alterbach_enten.png" target="_blank"><img class="img_side" src="img/alterbach_enten.png"></a>
+    <a href="img/alterbach_enten2.png" target="_blank"><img class="img_side" src="img/alterbach_enten2.png"></a>
+</div>
+</section>
+
+<section class="clear">
+<div id="map5" class="side_map"></div>
+<div class="side_text">
+    <h2>Alterbach Unterlauf</h2>
+    <p>Im Unterlauf gibt es zwei Fischtreppen, eine davon an der M&uuml;ndung.</p>
+    <a href="img/alterbach_unterlauf.png" target="_blank"><img class="img_side" src="img/alterbach_unterlauf.png"></a>
+    <a href="img/alterbach_muendung.png" target="_blank"><img class="img_side" src="img/alterbach_muendung.png"></a>
+</div>
+</section>
+
+<footer class="clear">
+<h2>Weitere Infos</h2>
+<ul>
+    <li><a href="https://de.wikipedia.org/wiki/Alterbach">Wikipedia Artikel</a></li>
+</ul>
+</footer>
+
+<script>
+    //Karte 1
+    //Karte
+    let map1 = L.map('map1').setView([47.825516748695044,13.140850067138674], 15);
+
+    //OpenStreetmap Layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map1);
+
+    //Karte 2
+    //Karte
+    let map2 = L.map('map2').setView([47.82404726699052,13.111066818237306], 14);
+
+    //OpenStreetmap Layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map2);
+
+    //Karte 3
+    //Karte
+    let map3 = L.map('map3').setView([47.814307297550975,13.075211048126222], 15);
+
+    //OpenStreetmap Layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map3);
+
+    //Karte 4
+    //Karte
+    let map4 = L.map('map4').setView([47.82220315265997,13.066520690917969], 15);
+
+    //OpenStreetmap Layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map4);
+
+    //Karte 5
+    //Karte
+    let map5 = L.map('map5').setView([47.825343870653725,13.043603897094728], 15);
+
+    //OpenStreetmap Layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map5);
+</script>
+</body>
+</html>

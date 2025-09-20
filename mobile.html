@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-	<!-- <meta http-equiv="refresh" content="30"> -->
+	<meta http-equiv="refresh" content="30">
 	<style>
 		html, body {
 			height: 100%;
@@ -67,22 +67,22 @@
 		const locationCircle = L.circle(e.latlng, radius).addTo(map);
 
 		//Entfernung zu Nawibrunnen
-		if (map.distance(e.latlng, nawi_brunnen.getLatLng()) < 500){
+		if (map.distance(e.latlng, nawi_brunnen.getLatLng()) < 50){
             nawi_brunnen.openPopup();
         }
 
 		//Entfernung zu Rainer Obelisk
-		if (map.distance(e.latlng, rainer_obelisk.getLatLng()) < 500){
+		if (map.distance(e.latlng, rainer_obelisk.getLatLng()) < 50){
             rainer_obelisk.openPopup();
         }
 
 		//Entfernung zum Weltkriegsdenkmal
-		if (map.distance(e.latlng, weltkriegsdenkmal.getLatLng()) < 500){
+		if (map.distance(e.latlng, weltkriegsdenkmal.getLatLng()) < 50){
             weltkriegsdenkmal.openPopup();
         }
 
 		//Entfernung zur Bücherzelle
-		if (map.distance(e.latlng, buecherzelle.getLatLng()) < 500){
+		if (map.distance(e.latlng, buecherzelle.getLatLng()) < 50){
             buecherzelle.openPopup();
         }
 
