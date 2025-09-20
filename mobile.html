@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-	<meta http-equiv="refresh" content="30">
+	<!-- <meta http-equiv="refresh" content="30"> -->
 	<style>
 		html, body {
 			height: 100%;
@@ -60,7 +60,7 @@
 		const radius = e.accuracy / 2;
 
 		//Lage-Popup
-		const locationMarker = L.marker(e.latlng).addTo(map)
+		const locationMarker = L.marker(e.latlng,{title: 'Current Position'}).addTo(map)
 			.bindPopup(`You are within ${radius} meters from this point`).openPopup();
 
 		//Genauigkeitskreis
@@ -101,13 +101,19 @@
         }
     });
 
+	textInfoA.sort(function(a,b){return a[1] - b[1]});
+
 	//Als Text
-	for (let x = 0; x < textInfoA.length-1; x++){
+	textInfoT = "<table>" + textInfoT;
+	for (let x = 0; x < textInfoA.length; x++){
+		textInfoT = textInfoT + "<tr>";
 		for(let y = 0; y < textInfoA[x].length; y++){
-		textInfoT = textInfoT + " | " + textInfoA[x][y];
+		textInfoT = textInfoT + "<td>" + textInfoA[x][y] + "</td>";
 	}
-	textInfoT += "<br>"
-}
+	textInfoT = textInfoT + "</tr>";
+	}
+	textInfoT = textInfoT + "</table>";
+
 document.getElementById('nearby').innerHTML = textInfoT;
 	 }
 
