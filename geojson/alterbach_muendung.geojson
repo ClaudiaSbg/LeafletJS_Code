@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "alterbach_muendung",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Point", "coordinates": [ 13.032209059098102, 47.826311997975452 ] } }
+]
+}
