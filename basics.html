@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lefleat JS Basics</title>
+        <style>
+            body {
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            pre {
+                font-family: 'Courier New', Courier, monospace;
+                border-left-style: solid;
+                border-left-color: midnightblue;
+                background-color:azure;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Einleitung</h1>
+        <p>Wenn man Karen erstellen will, ohne auf Services wie Google Maps angewiesen zu sein kann man dafür z.B. Leaflet JS nutzen und auf Basis dessen und Services wie Open Streetmal und offenen Geodaten selber Karten erstellen.</p>
+        <p>Man ben&ouml;tigt dafür folgendes:</p>
+        <ul>
+            <li>Ein Programm zum Bearbeiten von Texten z.B.: Notepad++</li>
+            <li>Informationen zu Leaflet z.B.: <a href="https://leafletjs.com/">Leaflet Website</a></li>
+            <li>Idealerweise einen Server oder Webspace zum Raufladen der Dateien</li>
+            <li>Falls man die Dateien auf einen Webspace laden will braucht man noch ein FTP bzw. SFT Programm z.B.: <a href="https://filezilla-project.org/download.php">Filezilla (Client)</a></li>
+        </ul>
+        <p>Leaflet basiert auf</p>
+        <ul>
+            <li>Javascript => Interaktivit&auml;t und Struktur</li>
+            <li>CSS (Cascading Style Sheets) => Design</li>
+            <li>HTML (Hypertext Markup Language => Rahmen</li>
+        </ul>
+        <h1>Rahmen</h1>
+        <p>Zum Start &ouml;ffnet man sein Programm zum Texte bearbeiten und speichert die Datei mit der Endung html ab z.B.: karte.html</p>
+        <p>Dann mu&szlig man einen Rahmencode reinkopiern</p>
+
+        <pre>
+        &#60;!DOCTYPE html&#62;
+        &#60;html&#62;
+        &#60;head&#62;
+        &#60;meta charset="utf-8"&#62;
+        &#60;meta name="viewport" content="width=device-width, initial-scale=1.0"&#62;
+        &#60;title&#62;Karte&#60;/title&#62;
+        &#60;/head&#62;
+        &#60;body&#62;
+        &#60;/body&#62;
+        &#60;/html&#62;
+        </pre>
+
+        <p>Man mu&szlig; dann den Code von Leaflet einbinden. Man kann ihn auf den eigenen Server/ Webspace laden aber man kann ihn auch online einbinden. Er mu&szli; in den Header eingebunden werden, also zischen die Header Tags.</p>
+
+        <p>CSS</p>
+        <pre>
+        &#60;link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+        crossorigin=""/&#62; 
+        </pre>
+        <p>Javascript</p>
+        <pre>
+        &#60;!-- Make sure you put this AFTER Leaflet's CSS --&#62;
+        &#60;script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="  
+        crossorigin="">&#60;/script&#62;
+        </pre>
+
+        <p>Man braucht dann noch einen Bereich, in dem die Karte angezeigt wird. Dieser mu&szlig; im body der Seite sein, also zwischen den body Tags.</p>
+        <pre>
+        &#60;div id="map"&#62;&#60;/div&#62;
+        </pre>
+
+        <p>Und man mu&szlig; den Bereich auch noch Formtieren, zumindest die Breite. Das macht man mit CSS.</p>
+        <pre>
+        &#60;style&#62;
+            #map { height: 600px; }
+        &#60;/style&#62;
+        </pre>
+
+    
+    <p>Zusammen schaut es dann so aus:</p>
+    <pre>
+    &#60;!DOCTYPE html&#62;
+    &#60;html&#62;
+    &#60;head&#62;
+    &#60;meta charset="utf-8"&#62;
+    &#60;meta name="viewport" content="width=device-width, initial-scale=1.0"&#62;
+    &#60;title&#62;Karte&#60;/title&#62;
+
+    &#60;link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+    crossorigin=""/&#62;
+
+    &#60;!-- Make sure you put this AFTER Leaflet's CSS --&#62;
+    &#60;script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="  
+    crossorigin="">&#60;/script&#62;
+
+    &#60;style&#62;
+        #map { height: 600px; }
+    &#60;/style&#62;
+    &#60;/head&#62;
+
+    &#60;body&#62;
+    &#60;div id="map"&#62;&#60;/div&#62;
+
+    &#60;/body&#62;
+    &#60;/html&#62;
+    </pre>
+
+    <h1>Erste Karte</h1>
+    <p>Der Code f&uuml;r die Struktur einer Karte ist Javascript. Dieser wird &uuml;blicherwise in script Tags in den Body Tag kopiert. Der Folgende Code </p>
+    <ul>
+        <li>Definiert eine Karte und zeigt sie im Bereich map &#60;div id="map"&#62;&#60;/div&#62; an</li>
+        <li>Die Zahlen in Eckigen Klammern sind die Koordinaten des Mittelpunkts der Karte.</li>
+        <li>Die n&aumlchste Zahl der Zoomfaktor</li>
+    </ul>
+
+    <pre>let map = L.map('map').setView([47.8,13.033333], 13);</pre>
+
+    <p>Der Code w&uuml;rde eine "leere Karte2 anzeigen. Man k&ouml;nnte eine eigene Basiskarte verwenden, aber man kann auch OpenStreetmap einbinden</p>
+    <pre>
+       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; &#60;a href="http://www.openstreetmap.org/copyright">OpenStreetMap&#60;/a&#62;'
+       }).addTo(map); 
+    </pre>
+    <p>Zusammen schaut das dann so aus</p>
+        <pre>
+        &#60;!DOCTYPE html&#62;
+        &#60;html&#62;
+        &#60;head&#62;
+        &#60;meta charset="utf-8"&#62;
+        &#60;meta name="viewport" content="width=device-width, initial-scale=1.0"&#62;
+        &#60;title&#62;Karte&#60;/title&#62;
+
+        &#60;link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+        crossorigin=""/&#62;
+
+        &#60;!-- Make sure you put this AFTER Leaflet's CSS --&#62;
+        &#60;script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="  
+        crossorigin="">&#60;/script&#62;
+
+        &#60;style&#62;
+            #map { height: 600px; }
+        &#60;/style&#62;
+        &#60;/head&#62;
+
+        &#60;body&#62;
+        &#60;div id="map"&#62;&#60;/div&#62;
+
+        &#60;script&#62;
+        let map = L.map('map').setView([47.8,13.033333], 13);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; &#60;a href="http://www.openstreetmap.org/copyright">OpenStreetMap&#60;/a&#62;'
+        }).addTo(map); 
+        &#60;/script&#62;
+
+
+        &#60;/body&#62;
+        &#60;/html&#62;
+    </pre>
+
+    <h1>Punkt setzen</h1>
+    <p>Damit mehr zu sehen ist kann man aber auch noch einen Marker setzen. Dazu kopiert man folgendes in den Script Tag unter den Tile Layer Code</p>
+
+    <pre>
+        var marker = L.marker([47.788698035838806, 13.060707859689483]).addTo(map);
+    </pre>
+
+    <p>Die Koordinaten kann man nat&uuml;rlich anpassen. Wichtig ist nur, dass sie innerhalb des gew&auml;hlten Kartenausschnitt sind.</p>
+
+    <p>Man kann dem Marker auch ein Popup hinzuf&uuml;gen:</p>
+    <pre>
+        marker.bindPopup("Nawi").openPopup();
+    </pre>
+
+    <p>Zusammen schaut das dann so aus:</p>
+    <pre>
+    &#60;!DOCTYPE html&#62;
+    &#60;html&#62;
+    &#60;head&#62;
+    &#60;meta charset="utf-8"&#62;
+    &#60;meta name="viewport" content="width=device-width, initial-scale=1.0"&#62;
+    &#60;title&#62;Karte&#60;/title&#62;
+
+    &#60;link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+    crossorigin=""/&#62;
+
+    &#60;!-- Make sure you put this AFTER Leaflet's CSS --&#62;
+    &#60;script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="  
+    crossorigin="">&#60;/script&#62;
+
+    &#60;style&#62;
+        #map { height: 600px; }
+    &#60;/style&#62;
+    &#60;/head&#62;
+
+    &#60;body&#62;
+    &#60;div id="map"&#62;&#60;/div&#62;
+
+    &#60;script&#62;
+    let map = L.map('map').setView([47.8,13.033333], 13);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; &#60;a href="http://www.openstreetmap.org/copyright">OpenStreetMap&#60;/a&#62;'
+    }).addTo(map); 
+
+    var marker = L.marker([47.788698035838806, 13.060707859689483]).addTo(map);
+    marker.bindPopup("Nawi").openPopup();
+
+    &#60;/script&#62;
+
+    &#60;/body&#62;
+    &#60;/html&#62;
+    </pre>
+
+    <h1>Informationen</h1>
+    <ul>
+        <li><a href="https://leafletjs.com/" target="_blank">Leaflet Website</a></li>
+        <ul>
+            <li><a href="https://leafletjs.com/examples.html" target="_blank">Leaflet Tutorials</a></li>
+            <li><a href="https://leafletjs.com/reference.html" target="_blank">Leaflet Docs</a></li>
+        </ul>
+
+        <li><a href="https://www.w3schools.com/" target="_blank">W3Schools Website</a></li>
+        <ul>
+        <li><a href="https://www.w3schools.com/html/" target="_blank">W3Schools HTML</a></li>
+        <li><a href="https://www.w3schools.com/css/" target="_blank">W3Schools CSS</a></li></li>
+        <li><a href="https://www.w3schools.com/js/" target="_blank">W3Schools Javascript</a></li>
+        </ul>
+    </ul>
+
+    <h1>Karte</h1>
+
+    <p><a href="karte.html target=_blank">Link</a></p>
+
+    <iframe src="karte.html" width="100%" height="620"></iframe>
+
+
+    </body>
+</html>
