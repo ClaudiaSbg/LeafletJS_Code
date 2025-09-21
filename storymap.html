@@ -29,12 +29,17 @@
         margin-right: 5px;
     }
 
-    section, footer{
+    section {
         margin-bottom: 50px;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         text-align: left;
+        height: 100%;
+    }
+
+    #uebersicht, #infos {
+        flex-direction: column;
     }
 
     .gallery img{
@@ -46,7 +51,7 @@
 
     header{
         background-image: url('img/nepomuk.png'); 
-        height: 1080px;
+        height: 100%;
         color: white;
         margin-bottom: 20px;
     }
@@ -57,16 +62,6 @@
 
     nav{
         margin-bottom: 50px;
-    }
-
-    #uebersicht{
-        flex-direction: column;
-    }
-
-    footer{
-        margin-bottom: 20px;
-        display: flex;
-        flex-direction: column;
     }
 
     .map{
@@ -191,11 +186,14 @@
 <div>M&uuml;ndung <div class="buttonR" onclick="removeLayer(alterbach_muendung_ue);">-</div> <div class="buttonG" onclick="addLayer(alterbach_muendung_ue);">+</div> <div class="buttonN" onclick="zoomTo(alterbach_muendung_ue);">🔎</div></div>
 </section>
 
-<section id="bilder">
-    <h2>Bilder</h2>
+<section id="infos">
+<h2>Weitere Infos</h2>
+<ul>
+    <li><a href="https://de.wikipedia.org/wiki/Alterbach">Wikipedia Artikel</a></li>
+</ul>
 </section>
 
-<section class="gallery">
+<section class="gallery" id="bilder">
     <img src="img/alterbach_ursprung.png" alt="Quell-Rohr bei Koppl" title="Quelle bei Koppl">
     <img src="img/alterbach_oberlauf.png" alt="M&auml;andernder Bach im Oberlauf" title="Oberlauf">
     <img src="img/alterbach_kaskaden.png" alt="2 Kaskaden" title="Kaskaden">
@@ -207,13 +205,7 @@
     <img src="img/alterbach_muendung.png" alt="Fischtreppe bei M&uuml;ndung in die Salzach" title="Fischtreppe bei M&uuml;ndung in die Salzach">
 </section>
 
-<footer id="infos">
-<h2>Weitere Infos</h2>
-<ul>
-    <li><a href="https://de.wikipedia.org/wiki/Alterbach">Wikipedia Artikel</a></li>
-</ul>
-</footer>
-
+<!-- JavaScript-->
 <script type="text/javascript" src="alterbach.js"></script>
 
 <script>
@@ -227,10 +219,12 @@
         map6.addLayer(layer);
     }
 
+    //Zoom to Layer
     function zoomTo(layer){
         map6.setView(layer.getLatLng(), 16);
     }
 
+    //Zoom to Uebersicht
     function zoomToAlterbach(){
         map6.setView([47.82398963940933,13.083343505859377], 13);
     }
@@ -319,7 +313,7 @@
     let alterbach_muendung_ue = L.marker([47.826311997975452,13.032209059098102]).addTo(map6);
     alterbach_muendung_ue.bindPopup("M&uuml;ndung<br><img src='img/alterbach_muendung.png' width='300px'>");
 
-    //Layer Controll
+    //Layer Control
     let baseMaps = {
     "Basemap Ortho": basemap,
     "OpenStreetMap": osm

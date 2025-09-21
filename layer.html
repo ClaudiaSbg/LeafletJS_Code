@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta charset="utf-8">
         <title>Standort&uuml;bersicht</title>
          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -35,19 +36,29 @@
             display: inline-block;
             font-size: 10px;
         }
+        .buttonN {
+            background-color: grey; /* Greey */
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 10px;
+      }
 
      </style>
-     <!-- Test-->
     </head>
     <body>
         <div><h1>Uni Salzburg</h1></div>
         <div id="nav">
             <table>
-            <tr><td>Nawi </td><td><div class="buttonR" id="nawiOff" onclick="removeLayer(nawi, 'nawiOff');">-</div> <div class="buttonG" id="nawiOn" onclick="addLayer(nawi, 'nawiOn');">+</div></td></tr>
-            <tr><td>Unipark Nonntal </td><td><div class="buttonR" id="unipark_nonntalOff" onclick="removeLayer(unipark_nonntal, 'unipark_nonntalOff');">-</div> <div class="buttonG" id="unipark_nonntalOn"  onclick="addLayer(unipark_nonntal, 'unipark_nonntalOn');">+</div></td></tr>
-            <tr><td>Geswi </td><td><div class="buttonR" id="geswiOff" onclick="removeLayer(geswi, 'geswiOff');">-</div> <div class="buttonG" id="geswiOn" onclick="addLayer(geswi, 'geswiOn');">+</div></td></tr>
-            <tr><td>Studiengebäude </td><td><div class="buttonR" id="studiengebaeudeOff" onclick="removeLayer(studiengebaeude, 'studiengebaeudeOff');">-</div> <div class="buttonG" id="studiengebaeudeOn" onclick="addLayer(studiengebaeude, 'studiengebaeudeOn');">+</div></td></tr>
-            </table>
+            <tr><td>Nawi </td><td><div class="buttonR" id="nawiOff" onclick="removeLayer(nawi, 'nawiOff');">-</div> <div class="buttonG" id="nawiOn" onclick="addLayer(nawi, 'nawiOn');">+</div></td><td><div class="buttonN" onclick="zoomTo(nawi);">🔎</div></td></tr>
+            <tr><td>Unipark Nonntal </td><td><div class="buttonR" id="unipark_nonntalOff" onclick="removeLayer(unipark_nonntal, 'unipark_nonntalOff');">-</div> <div class="buttonG" id="unipark_nonntalOn"  onclick="addLayer(unipark_nonntal, 'unipark_nonntalOn');">+</div></td><td><div class="buttonN" onclick="zoomTo(unipark_nonntal);">🔎</div></td></tr>
+            <tr><td>Geswi </td><td><div class="buttonR" id="geswiOff" onclick="removeLayer(geswi, 'geswiOff');">-</div> <div class="buttonG" id="geswiOn" onclick="addLayer(geswi, 'geswiOn');">+</div></td><td><div class="buttonN" onclick="zoomTo(geswi);">🔎</div></td></tr>
+            <tr><td>Studiengebäude </td><td><div class="buttonR" id="studiengebaeudeOff" onclick="removeLayer(studiengebaeude, 'studiengebaeudeOff');">-</div> <div class="buttonG" id="studiengebaeudeOn" onclick="addLayer(studiengebaeude, 'studiengebaeudeOn');">+</div></td><td><div class="buttonN" onclick="zoomTo(studiengebaeude);">🔎</div></td></tr>
+            <tr><td></td><td></td><td><div class="buttonN" onclick="zoomUebersicht();">🔎</div></td></tr>
+          </table>
         </div>
         <div id="status"></div>
         <div id="map"></div>
@@ -69,9 +80,6 @@
           let b = summeb/Object.keys(Koordinaten).length;
 
           let l = summel/Object.keys(Koordinaten).length;
-
-          console.log(b);
-          console.log(l);
         
         //Karte 
         let map = L.map('map').setView([b,l], 15);
@@ -109,6 +117,15 @@
         document.getElementById(layerOn.slice(0, -2) + "Off").style.backgroundColor = "#f44336";
     }
 
+    //Zoom to Layer
+    function zoomTo(layer){
+        map.setView(layer.getLatLng(), 16);
+    }
+
+    //Zoom to Uebersicht
+    function zoomUebersicht(){
+        map.setView([b,l], 15);
+    }
 
     //Layer checken und Button-Status-Farbe ändern
     function layerCheck(layer, layerName){
