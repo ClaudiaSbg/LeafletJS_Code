@@ -16,12 +16,12 @@
     }
 
     .side_map{
-        height: 400px; 
-        width: 600px;
+        height: 800px; 
+        width: 1200px;
         margin: 10px;
     }
     .side_text{
-        width: 400px;
+        width: 600px;
     }
 
     .img_side{
@@ -31,11 +31,14 @@
 
     section {
         margin-bottom: 50px;
+        padding-bottom: 10px;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         text-align: left;
-        height: 100%;
+        border-color: grey;
+        border-width: 0 0 1px 0;
+        border-style: solid;
     }
 
     #uebersicht, #infos {
@@ -51,6 +54,8 @@
 
     header{
         background-image: url('img/nepomuk.png'); 
+        background-repeat: no-repeat;
+        background-position: center;
         height: 100%;
         color: white;
         margin-bottom: 20px;
@@ -65,8 +70,8 @@
     }
 
     .map{
-        height: 800px; 
-        width: 1000px;
+        width: 1600px;
+        height: 800px;
     }
 
     .buttonR {
@@ -231,7 +236,8 @@
 
     //Karte 1
     //Karte
-    let map1 = L.map('map1').setView([47.825516748695044,13.140850067138674], 15);
+    let map1 = L.map('map1').setView([47.825516748695044,13.140850067138674], 16);
+    map1.scrollWheelZoom.disable();
 
     //OpenStreetmap Layer
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -244,7 +250,8 @@
 
     //Karte 2
     //Karte
-    let map2 = L.map('map2').setView([47.82404726699052,13.111066818237306], 14);
+    let map2 = L.map('map2').setView([47.82404726699052,13.111066818237306], 15);
+    map2.scrollWheelZoom.disable();
 
     //OpenStreetmap Layer
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -254,7 +261,8 @@
 
     //Karte 3
     //Karte
-    let map3 = L.map('map3').setView([47.814307297550975,13.075211048126222], 15);
+    let map3 = L.map('map3').setView([47.814307297550975,13.075211048126222], 16);
+    map3.scrollWheelZoom.disable();
 
     //OpenStreetmap Layer
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -264,7 +272,8 @@
 
     //Karte 4
     //Karte
-    let map4 = L.map('map4').setView([47.82220315265997,13.066520690917969], 15);
+    let map4 = L.map('map4').setView([47.82220315265997,13.066520690917969], 16);
+    map4.scrollWheelZoom.disable();
 
     //OpenStreetmap Layer
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -274,7 +283,8 @@
 
     //Karte 5
     //Karte
-    let map5 = L.map('map5').setView([47.825343870653725,13.043603897094728], 15);
+    let map5 = L.map('map5').setView([47.825343870653725,13.043603897094728], 16);
+    map5.scrollWheelZoom.disable();
 
     //OpenStreetmap Layer
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -288,6 +298,7 @@
     //Karte 6
     //Karte
     let map6 = L.map('map6').setView([47.82398963940933,13.083343505859377], 13);
+    map6.scrollWheelZoom.disable();
 
     //Basemap
     const basemap =  L.tileLayer('https://mapsneu.wien.gv.at/basemap/bmaporthofoto30cm/{type}/google3857/{z}/{y}/{x}.{format}', {
