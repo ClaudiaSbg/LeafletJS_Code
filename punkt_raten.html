@@ -1,0 +1,109 @@
+
+<html>
+    <head>
+        <title>Punkt Raten</title>
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+      <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+     <style>
+        #map { height: 600px; }
+        .button {
+            background-color: #e7e7e7; 
+            color: black; /* Gray */
+            border: none;
+            padding: 15px 32px;
+            margin-bottom: 5px;
+            margin-top: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        p, h1, div {
+            font-family: Tahoma, Verdana, sans-serif;
+        }
+
+     </style>
+     <!-- Test-->
+    </head>
+    <body>
+        <div>
+            <h1>Punkt Raten</h1>
+            <p>Uni Salzburg (Verwaltung)</p>
+        </div>
+        <div id="tryAgain" class="button" onclick="location.reload()">Reload</div>
+        <div id="map"></div>
+             <script>
+        //Karte 
+        let map = L.map('map').setView([47.8,13.033333], 13);
+
+       //Basemap als Layer
+       L.tileLayer('https://mapsneu.wien.gv.at/basemap/bmaporthofoto30cm/{type}/google3857/{z}/{y}/{x}.{format}', {
+            maxZoom: 20,
+            attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>',
+            type: 'normal',
+            format: 'jpeg',
+            bounds: [[46.35877, 8.782379], [49.037872, 17.189532]]
+        }).addTo(map);
+
+        //"Transparenter" Marker
+        let myIcon = L.icon({
+            iconUrl: 'transparent.png',
+            iconSize: [1, 1]
+            });
+
+        let marker = L.marker([47.797222,13.048056], {icon: myIcon}).addTo(map);
+
+        //Reaktion auf Map-Klick
+        function onMapClick(e) {
+
+        //Farbe je nach Distanz rot > gelb > grün
+        let distanceColor = "";
+
+        if (map.distance(e.latlng, marker.getLatLng()) > 500){
+            distanceColor = "red";
+        } else if (map.distance(e.latlng, marker.getLatLng()) <= 500 & map.distance(e.latlng, marker.getLatLng()) >= 100){
+            distanceColor = "yellow";
+        } else {
+            distanceColor = "green";
+        }
+
+        //Sichtbarer Icon
+        let myIcon2 = L.icon({
+            iconUrl: 'pink.png',
+            iconSize: [10, 10]
+            });
+        
+        //Marker setzen, wenn nah genug dran
+        if (map.distance(e.latlng, marker.getLatLng()) < 100){
+            marker.setIcon(myIcon2);
+        }
+
+        //Kreis mit Radius Distanz und Mittelpunkt Map-Klick
+        let circle = L.circle(e.latlng, {
+            color: distanceColor,
+            fillColor: distanceColor,
+            fillOpacity: 0.5,
+            radius: map.distance(e.latlng, marker.getLatLng())
+        }).addTo(map);
+
+        //Info-Pop-Up (Map Klick und Distanz Marker <-> Map Klick)
+        let popup = L.popup();
+        popup
+            .setLatLng(e.latlng)
+            .setContent("You clicked the map at " + e.latlng.toString() + "<br>The distance to the marker is: " + map.distance(e.latlng, marker.getLatLng()) + " m")
+            .openOn(map);
+        }
+
+        map.on('click', onMapClick);
+
+
+     </script>
+    </body>
+</html>
+

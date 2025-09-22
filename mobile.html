@@ -1,0 +1,132 @@
+<html lang="en">
+<head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Mobile tutorial - Leaflet</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+	<!-- <meta http-equiv="refresh" content="30"> -->
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			font-family: Verdana, Geneva, Tahoma, sans-serif;
+		}
+		.leaflet-container {
+			height: 400px;
+			width: 600px;
+			max-width: 100%;
+			max-height: 100%;
+		}
+	</style>
+
+	<style>body { padding: 0; margin: 0; } #map { height: 100%; width: 100vw; }</style>
+</head>
+<body>
+
+<div id='map'></div>
+<div id='nearby'>Text</div>
+
+<script>
+	//Weltkarte
+	const map = L.map('map').fitWorld();
+
+	//OpenStreatmap
+	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+	//Marker Brunnen
+	let nawi_brunnen = L.marker([47.788702355087878,13.060706238504592],{title: 'Nawi Brunnen'}).addTo(map);
+     nawi_brunnen.bindPopup("<strong>Nawi-Brunnen</strong><br>Brunnen im Innenhof der <a href=\"https://www.plus.ac.at/raumvermarktung/naturwissenschaftliche-fakultaet/\" target =\"_blank\">Nawi</a><br><img src=\"nawi_brunnen.jpg\" width=\"200\">");
+
+	//Marker Rainer Obelisk
+	let rainer_obelisk = L.marker([47.7811666, 13.0489689],{title: 'Rainer Obelisk'}).addTo(map);
+	rainer_obelisk.bindPopup("<strong>Rainer Obelisk</strong>");
+
+	//Marker Weltkriegsdenkmal
+	let weltkriegsdenkmal = L.marker([47.778445846942752, 13.047404576216683],{title: 'Weltkriegsdenkmal'}).addTo(map);
+	weltkriegsdenkmal.bindPopup("<strong>Weltkriegsdenkmal</strong>");
+
+	//Marker Bücherzelle
+	let buecherzelle = L.marker([47.781106823686009, 13.049494380599686],{title: 'Bücherzelle'}).addTo(map);
+	buecherzelle.bindPopup("<strong>Bücherzelle</strong>");
+	
+	//Ortungsfunktion
+	 function onLocationFound(e) {
+		const radius = e.accuracy / 2;
+
+		//Lage-Popup
+		const locationMarker = L.marker(e.latlng,{title: 'Current Position'}).addTo(map)
+			.bindPopup(`You are within ${radius} meters from this point`).openPopup();
+
+		//Genauigkeitskreis
+		const locationCircle = L.circle(e.latlng, radius).addTo(map);
+
+		//Entfernung zu Nawibrunnen
+		if (map.distance(e.latlng, nawi_brunnen.getLatLng()) < 50){
+            nawi_brunnen.openPopup();
+        }
+
+		//Entfernung zu Rainer Obelisk
+		if (map.distance(e.latlng, rainer_obelisk.getLatLng()) < 50){
+            rainer_obelisk.openPopup();
+        }
+
+		//Entfernung zum Weltkriegsdenkmal
+		if (map.distance(e.latlng, weltkriegsdenkmal.getLatLng()) < 50){
+            weltkriegsdenkmal.openPopup();
+        }
+
+		//Entfernung zur Bücherzelle
+		if (map.distance(e.latlng, buecherzelle.getLatLng()) < 50){
+            buecherzelle.openPopup();
+        }
+
+	let textInfoA = [];
+
+	let textInfoT = [];
+
+	//Informationen zu den Markern
+	map.eachLayer(function(layer) {
+        if (layer instanceof L.Marker) {
+            let lCoordinates = layer.getLatLng();
+			let lTitel = layer.options.title;
+			let lPopup = layer.getPopup().getContent();
+			let lEntfernung = map.distance(e.latlng, layer.getLatLng())
+			textInfoA.push([lTitel, lEntfernung, lCoordinates,lPopup])
+        }
+    });
+
+	textInfoA.sort(function(a,b){return a[1] - b[1]});
+
+	//Als Text
+	textInfoT = "<table>" + textInfoT;
+	for (let x = 0; x < textInfoA.length; x++){
+		textInfoT = textInfoT + "<tr>";
+		for(let y = 0; y < textInfoA[x].length; y++){
+		textInfoT = textInfoT + "<td>" + textInfoA[x][y] + "</td>";
+	}
+	textInfoT = textInfoT + "</tr>";
+	}
+	textInfoT = textInfoT + "</table>";
+
+document.getElementById('nearby').innerHTML = textInfoT;
+	 }
+
+	//Funktion für Probleme bei der Lokalisierung
+	function onLocationError(e) {
+		alert(e.message);
+	}
+
+	map.on('locationfound', onLocationFound);
+	map.on('locationerror', onLocationError);
+
+	map.locate({setView: true, maxZoom: 16});
+</script>
+</body>
+</html>

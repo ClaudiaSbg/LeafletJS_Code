@@ -1,0 +1,82 @@
+<html>
+<head>
+    <title>Infos</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+<style>
+    #map { 
+        height: 400px; 
+        width: 600px;
+        float: left;}
+    #infos {
+        float: left;
+    }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div id="infos">
+    <p>Center: <div id="center"></div>
+    <p>Zoom: <div id="zoom"></div></p>
+    <p>Bounds: <div id="bounds"></div></p>
+</div>
+<script>
+    //Zentrum
+    let mCenter = [47.8,13.033333];
+    
+    //Zoomfaktor
+    let mZoom = 13;
+    
+    //Anzeige Zentrum
+    document.getElementById("center").innerHTML = mCenter;
+
+    //Anzeige Zoom
+    document.getElementById("zoom").innerHTML = mZoom;
+
+    //Karte
+    let map = L.map('map').setView(mCenter, mZoom);
+
+    //OpenStreetmap Layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    //Zentrum der Karte ermitteln
+    function infoCenter(){
+        let mCenter = map.getCenter();
+        document.getElementById("center").innerHTML = mCenter;
+        document.getElementById("center").innerHTML = mCenter.lat+","+mCenter.lng;
+    }
+
+    //Zoomfaktor der Karte ermitteln
+    function infoZoom(){
+        let mZoom = map.getZoom();
+        document.getElementById("zoom").innerHTML = mZoom;
+    }
+
+    //Bounds ermitteln
+    function infoBounds(){
+        let cSouthWest = map.getBounds().getSouthWest();
+        let cNorthEast = map.getBounds().getNorthEast();
+        let cNorthWest = map.getBounds().getNorthWest();
+        let cSouthEast = map.getBounds().getSouthEast();
+        document.getElementById("bounds").innerHTML = "Southwest: " + cSouthWest.lat+","+ cSouthWest.lng + "<br> Northwest: " + cNorthWest.lat+","+ cNorthWest.lng + "<br>Northeast: " + cNorthEast.lat + "," + cNorthEast.lng + "<br> Southeast: " + cSouthEast.lat+","+ cSouthEast.lng;
+    }
+
+    map.on('zoom', infoCenter);
+    map.on('zoom', infoZoom);
+    map.on('zoom', infoBounds);
+    
+    map.on('move', infoCenter);
+    map.on('move', infoZoom);
+    map.on('move', infoBounds);
+</script>
+</body>
+</html>

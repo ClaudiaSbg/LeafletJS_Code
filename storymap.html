@@ -1,0 +1,343 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Storymap</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+<style>
+    body{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .side_map{
+        height: 800px; 
+        width: 1200px;
+        margin: 10px;
+    }
+    .side_text{
+        width: 600px;
+    }
+
+    .img_side{
+        width: 100px;
+        margin-right: 5px;
+    }
+
+    section {
+        margin-bottom: 50px;
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        text-align: left;
+        border-color: grey;
+        border-width: 0 0 1px 0;
+        border-style: solid;
+    }
+
+    #uebersicht, #infos {
+        flex-direction: column;
+    }
+
+    .gallery img{
+        margin: 5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 5px;
+    }
+
+    header{
+        background-image: url('img/nepomuk.png'); 
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 100%;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    header h1, header p{
+        text-align: center;
+    }
+
+    nav{
+        margin-bottom: 50px;
+    }
+
+    .map{
+        width: 1600px;
+        height: 800px;
+    }
+
+    .buttonR {
+        background-color: #f44336; /* Red */
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 10px;
+        height: 10px;
+        width: 15px;
+    }
+    .buttonG {
+        background-color: #04AA6D; /* Green */
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 10px;
+        height: 10px;
+        width: 15px;
+    }
+    .buttonN {
+        background-color: grey; /* Greey */
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 10px;
+        height: 10px;
+        width: 15px;
+    }
+
+</style>
+</head>
+<body>
+<header>
+    <h1>Alterbach</h1>
+    <p>Koppl | Gnigl | Itzling</p>
+</header>
+<nav><a href="#quelle">Alterbach Ursprung</a> | <a href="#oberlauf">Alterbach Oberlauf</a> | <a href="#obergnigl">Alterbach Obergnigl</a> | <a href="#mittellauf">Alterbach Mittellauf</a> | <a href="#unterlauf">Alterbach Unterlauf</a> | <a href="#uebersicht">&Uuml;bersichtskarte</a> | <a href="#infos">Weitere Infos</a> | <a href="#bilder">Bilder</a></nav>
+
+<section>
+    Der Alterbach ist ein Bach im Bundesland Salzburg. Er flie&szligt von der Gemeinde Koppl durch die Salzburger Stadtteile Gnigl und Itzling und m&uuml;ndet in Itzling in die Salzach.
+</section>
+
+<section id="quelle">
+<div id="map1" class="side_map"></div>
+<div clas="side_text">
+    <h2>Alterbach Ursprung</h2>
+    <p>Der Ursprung des Alterbachs befindet sich in Koppl.</p>
+    <div class="gallery">
+    <a href="img/alterbach_ursprung.png" target="_blank"><img class="img_side" src="img/alterbach_ursprung.png" /></a>
+    </div>
+</div>
+</section>
+
+<section id="oberlauf">
+<div class="side_text">
+    <h2>Alterbach Oberlauf</h2>
+    <p>Im Oberlauf flie&szlig;t er zwischen Heuberg und Gaisberg durch und hat mehrere kleine Zufl&uuml;sse. Dort ist er teilweise nicht verbaut und teilweise aber realtiv stark.</p>
+    <div class="gallery">
+    <a href="img/alterbach_oberlauf.png" target="_blank"><img class="img_side" src="img/alterbach_oberlauf.png"></a>
+    <a href="img/alterbach_kaskaden.png" target="_blank"><img class="img_side" src="img/alterbach_kaskaden.png"></a>
+    </div>
+</div>
+<div id="map2" class="side_map"></div>
+</section>
+
+<section id="obergnigl">
+<div id="map3" class="side_map"></div>
+<div class="side_text">
+    <h2>Alterbach Obergnigl</h2>
+    <p>In Obergnigl verl&auml;uft der Bach in einem gepflasterten Bett.</p>
+</div>
+</section>
+
+<section id="mittellauf">
+<div class="side_text"><h2>Alterbach Mittellauf</h2>
+    <p>Im Mittellauf ist er weniger reguliert aber von bebauten bzw. bewirtschafteten Fl&auml;chen umgeben. Es f&uuml;hrt ein Weg entlang. Dort flie&szlig;t auch der S&ouml;llheimer Bach zu.</p>
+    <div class="gallery">
+    <a href="img/alterbach_mittellauf.png" target="_blank"><img class="img_side" src="img/alterbach_mittellauf.png"></a>
+    <a href="img/alterbach_soelheimerbach.png" target="_blank"><img class="img_side" src="img/alterbach_soelheimerbach.png"></a>
+    </div>
+    <p>In diesem Bereich gibt es auch einige Stockenten.</p>
+    <div class="gallery">
+    <a href="img/alterbach_enten.png" target="_blank"><img class="img_side" src="img/alterbach_enten.png"></a>
+    <a href="img/alterbach_enten2.png" target="_blank"><img class="img_side" src="img/alterbach_enten2.png"></a>
+    </div>
+</div>
+<div id="map4" class="side_map"></div>
+</section>
+
+<section id="unterlauf">
+<div id="map5" class="side_map"></div>
+<div class="side_text">
+    <h2>Alterbach Unterlauf</h2>
+    <p>Im Unterlauf gibt es zwei Fischtreppen, eine davon an der M&uuml;ndung.</p>
+    <div class="gallery">
+    <a href="img/alterbach_unterlauf.png" target="_blank"><img class="img_side" src="img/alterbach_unterlauf.png"></a>
+    <a href="img/alterbach_muendung.png" target="_blank"><img class="img_side" src="img/alterbach_muendung.png"></a>
+    </div>
+</div>
+</section>
+
+<section id="uebersicht">
+<h2>&Uuml;bersichtskarte</h2>
+<div id="map6" class="map"></div>
+<div>Alterbach <div class="buttonR" onclick="removeLayer(alterbachl);">-</div> <div class="buttonG" onclick="addLayer(alterbachl);">+</div> <div class="buttonN" onclick="zoomToAlterbach();">🔎</div></div>
+<div>Quelle <div class="buttonR" onclick="removeLayer(alterbach_quelle_ue);">-</div> <div class="buttonG" onclick="addLayer(alterbach_quelle_ue);">+</div> <div class="buttonN" onclick="zoomTo(alterbach_quelle_ue);">🔎</div></div>
+<div>M&uuml;ndung <div class="buttonR" onclick="removeLayer(alterbach_muendung_ue);">-</div> <div class="buttonG" onclick="addLayer(alterbach_muendung_ue);">+</div> <div class="buttonN" onclick="zoomTo(alterbach_muendung_ue);">🔎</div></div>
+</section>
+
+<section id="infos">
+<h2>Weitere Infos</h2>
+<ul>
+    <li><a href="https://de.wikipedia.org/wiki/Alterbach">Wikipedia Artikel</a></li>
+</ul>
+</section>
+
+<section class="gallery" id="bilder">
+    <img src="img/alterbach_ursprung.png" alt="Quell-Rohr bei Koppl" title="Quelle bei Koppl">
+    <img src="img/alterbach_oberlauf.png" alt="M&auml;andernder Bach im Oberlauf" title="Oberlauf">
+    <img src="img/alterbach_kaskaden.png" alt="2 Kaskaden" title="Kaskaden">
+    <img src="img/alterbach_mittellauf.png" alt="Mittellauf" title="Mittellauf">
+    <img src="img/alterbach_soelheimerbach.png" alt="M&uuml;ndung S&ouml;llheimer Bach" title="M&uuml;ndung S&ouml;llheimer Bach">
+    <img src="img/alterbach_enten.png" alt="2 m&auml;nnliche und 1 weibliche Stockente" title="Stockenten">
+    <img src="img/alterbach_enten2.png" alt="2 m&auml;nnliche Stockenten auf Steinen im Bach" title="Stockenten">
+    <img src="img/alterbach_unterlauf.png" alt="Fischtreppe im Unterlauf" title="Fischtreppe">
+    <img src="img/alterbach_muendung.png" alt="Fischtreppe bei M&uuml;ndung in die Salzach" title="Fischtreppe bei M&uuml;ndung in die Salzach">
+</section>
+
+<!-- JavaScript-->
+<script type="text/javascript" src="alterbach.js"></script>
+
+<script>
+    //Layer von Uebersichtskarte entfernen
+    function removeLayer(layer){
+        map6.removeLayer(layer);
+      }
+
+    //Layer zu Uebersichtskarte hinzufügen
+    function addLayer(layer){
+        map6.addLayer(layer);
+    }
+
+    //Zoom to Layer
+    function zoomTo(layer){
+        map6.setView(layer.getLatLng(), 16);
+    }
+
+    //Zoom to Uebersicht
+    function zoomToAlterbach(){
+        map6.setView([47.82398963940933,13.083343505859377], 13);
+    }
+
+    //Karte 1
+    //Karte
+    let map1 = L.map('map1').setView([47.825516748695044,13.140850067138674], 16);
+    map1.scrollWheelZoom.disable();
+
+    //OpenStreetmap Layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map1);
+
+    let alterbach_quelle = L.marker([47.825408189872256,13.144816195612497]).addTo(map1);
+    alterbach_quelle.bindPopup("Quelle<br><img src='img/alterbach_ursprung.png' width='300px'>");
+
+    //Karte 2
+    //Karte
+    let map2 = L.map('map2').setView([47.82404726699052,13.111066818237306], 15);
+    map2.scrollWheelZoom.disable();
+
+    //OpenStreetmap Layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map2);
+
+    //Karte 3
+    //Karte
+    let map3 = L.map('map3').setView([47.814307297550975,13.075211048126222], 16);
+    map3.scrollWheelZoom.disable();
+
+    //OpenStreetmap Layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map3);
+
+    //Karte 4
+    //Karte
+    let map4 = L.map('map4').setView([47.82220315265997,13.066520690917969], 16);
+    map4.scrollWheelZoom.disable();
+
+    //OpenStreetmap Layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map4);
+
+    //Karte 5
+    //Karte
+    let map5 = L.map('map5').setView([47.825343870653725,13.043603897094728], 16);
+    map5.scrollWheelZoom.disable();
+
+    //OpenStreetmap Layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map5);
+
+    let alterbach_muendung = L.marker([47.826311997975452,13.032209059098102]).addTo(map5);
+    alterbach_muendung.bindPopup("M&uuml;ndung<br><img src='img/alterbach_muendung.png' width='300px'>");
+
+    //Karte 6
+    //Karte
+    let map6 = L.map('map6').setView([47.82398963940933,13.083343505859377], 13);
+    map6.scrollWheelZoom.disable();
+
+    //Basemap
+    const basemap =  L.tileLayer('https://mapsneu.wien.gv.at/basemap/bmaporthofoto30cm/{type}/google3857/{z}/{y}/{x}.{format}', {
+    maxZoom: 20,
+    attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>',
+    type: 'normal',
+    format: 'jpeg',
+    bounds: [[46.35877, 8.782379], [49.037872, 17.189532]]
+    }).addTo(map6);
+
+    //OpenStreetmap
+    const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map6);
+
+    //Alterbach
+    const alterbachl = L.geoJson(alterbach, {attribution: '<a href="https://www.data.gv.at/katalog/datasets/ea68ecc1-b0bb-4911-ad81-fe6e0112a0ed">OpenData Land Salzbug</a> - <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>'}).addTo(map6);
+
+    let alterbach_quelle_ue = L.marker([47.825408189872256,13.144816195612497]).addTo(map6);
+    alterbach_quelle_ue.bindPopup("Quelle<br><img src='img/alterbach_ursprung.png' width='300px'>");
+
+    let alterbach_muendung_ue = L.marker([47.826311997975452,13.032209059098102]).addTo(map6);
+    alterbach_muendung_ue.bindPopup("M&uuml;ndung<br><img src='img/alterbach_muendung.png' width='300px'>");
+
+    //Layer Control
+    let baseMaps = {
+    "Basemap Ortho": basemap,
+    "OpenStreetMap": osm
+    };
+
+    let overlayMaps = {
+        "Alterbach": alterbachl,
+        "Quelle": alterbach_quelle_ue,
+        "M&uuml;ndung": alterbach_muendung_ue 
+    };
+    
+    var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map6);
+
+</script>
+</body>
+</html>

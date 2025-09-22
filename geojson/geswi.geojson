@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "geswi",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { }, "geometry": { "type": "Point", "coordinates": [ 13.050307057031802, 47.79839053277815 ] } }
+]
+}

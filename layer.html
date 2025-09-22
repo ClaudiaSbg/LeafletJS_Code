@@ -1,0 +1,145 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Standort&uuml;bersicht</title>
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+      <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+     <style>
+        #map { height: 500px; }
+
+        div {
+            font-family: Tahoma, Verdana, sans-serif;
+        }
+
+        .buttonR {
+            background-color: #f44336; /* Red */
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 10px;
+        }
+        .buttonG {
+            background-color: #04AA6D; /* Green */
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 10px;
+        }
+        .buttonN {
+            background-color: black; /* Black */
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 10px;
+      }
+
+     </style>
+    </head>
+    <body>
+        <div><h1>Uni Salzburg</h1></div>
+        <div id="nav">
+            <table>
+            <tr><td>Nawi </td><td><div class="buttonR" id="nawiOff" onclick="removeLayer(nawi, 'nawiOff');">-</div> <div class="buttonG" id="nawiOn" onclick="addLayer(nawi, 'nawiOn');">+</div></td><td><div class="buttonN" onclick="zoomTo(nawi);">🔎</div></td></tr>
+            <tr><td>Unipark Nonntal </td><td><div class="buttonR" id="unipark_nonntalOff" onclick="removeLayer(unipark_nonntal, 'unipark_nonntalOff');">-</div> <div class="buttonG" id="unipark_nonntalOn"  onclick="addLayer(unipark_nonntal, 'unipark_nonntalOn');">+</div></td><td><div class="buttonN" onclick="zoomTo(unipark_nonntal);">🔎</div></td></tr>
+            <tr><td>Geswi </td><td><div class="buttonR" id="geswiOff" onclick="removeLayer(geswi, 'geswiOff');">-</div> <div class="buttonG" id="geswiOn" onclick="addLayer(geswi, 'geswiOn');">+</div></td><td><div class="buttonN" onclick="zoomTo(geswi);">🔎</div></td></tr>
+            <tr><td>Studiengebäude </td><td><div class="buttonR" id="studiengebaeudeOff" onclick="removeLayer(studiengebaeude, 'studiengebaeudeOff');">-</div> <div class="buttonG" id="studiengebaeudeOn" onclick="addLayer(studiengebaeude, 'studiengebaeudeOn');">+</div></td><td><div class="buttonN" onclick="zoomTo(studiengebaeude);">🔎</div></td></tr>
+            <tr><td></td><td></td><td><div class="buttonN" onclick="zoomUebersicht();">🔎</div></td></tr>
+          </table>
+        </div>
+        <div id="status"></div>
+        <div id="map"></div>
+             <script>
+        //Zentrum
+        let Koordinaten = {
+          nawi: [47.788698035838806, 13.060707859689483],
+          unipark_nonntal: [47.794859196706746, 13.054142762420605],
+          geswi: [47.79839053277815, 13.050307057031802],
+          studiengebaeude: [47.799255911856044, 13.041616673285635]
+        }
+        let summel = 0;
+        let summeb = 0;
+        for (let [name, koordinate] of Object.entries(Koordinaten)){
+          summeb += koordinate[0];
+          summel += koordinate[1];
+          }
+
+          let b = summeb/Object.keys(Koordinaten).length;
+
+          let l = summel/Object.keys(Koordinaten).length;
+        
+        //Karte 
+        let map = L.map('map').setView([b,l], 15);
+
+       //Basemap als Layer
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+     }).addTo(map);
+
+      //verschiedene Standorte
+     let nawi = L.marker(Koordinaten.nawi).addTo(map);
+     nawi.bindPopup("Nawi");
+
+     let unipark_nonntal = L.marker(Koordinaten.unipark_nonntal).addTo(map);
+     unipark_nonntal.bindPopup("Unipark Nonntal");
+
+     let geswi = L.marker(Koordinaten.geswi).addTo(map);
+      geswi.bindPopup("Geswi");
+
+     let studiengebaeude = L.marker(Koordinaten.studiengebaeude).addTo(map);
+      studiengebaeude.bindPopup("Studiengebäude");
+
+    //Layer von Karte entfernen
+      function removeLayer(layer, layerOff){
+        map.removeLayer(layer);
+        document.getElementById(layerOff).style.backgroundColor = "grey";
+        document.getElementById(layerOff.slice(0, -3) + "On").style.backgroundColor = "#04AA6D";
+      }
+
+    //Layer zu Karte hinzufügen
+      function addLayer(layer, layerOn){
+        map.addLayer(layer);
+        document.getElementById(layerOn).style.backgroundColor = "grey";
+        document.getElementById(layerOn.slice(0, -2) + "Off").style.backgroundColor = "#f44336";
+    }
+
+    //Zoom to Layer
+    function zoomTo(layer){
+        map.setView(layer.getLatLng(), 16);
+    }
+
+    //Zoom to Uebersicht
+    function zoomUebersicht(){
+        map.setView([b,l], 15);
+    }
+
+    //Layer checken und Button-Status-Farbe ändern
+    function layerCheck(layer, layerName){
+    if (map.hasLayer(layer)){
+       document.getElementById(layerName + "On").style.backgroundColor = "grey";
+    }
+    }
+
+    layerCheck(nawi, "nawi");
+    layerCheck(unipark_nonntal, "unipark_nonntal");
+    layerCheck(geswi, "geswi");
+    layerCheck(studiengebaeude, "studiengebaeude");
+
+
+     </script>
+    </body>
+</html>

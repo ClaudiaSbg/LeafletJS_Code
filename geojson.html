@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>Stadtteile Salzburg</title>
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+      <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+     <style>
+        #map { height: 1000px; }
+
+        div {
+            font-family: Tahoma, Verdana, sans-serif;
+        }
+</style>
+     <!-- Test-->
+    </head>
+    <body>
+        <div><h1>Stadtteile Salzburg</h1></div>
+    <div id="map"></div>
+    <script type="text/javascript" src="stadtteile_salzburg.js"></script>
+    <script>
+    //Karte 
+    let map = L.map('map').setView([47.8,13.033333], 13);
+
+    //Basemap
+    const basemap =  L.tileLayer('https://mapsneu.wien.gv.at/basemap/bmaporthofoto30cm/{type}/google3857/{z}/{y}/{x}.{format}', {
+            maxZoom: 20,
+            attribution: 'Datenquelle: <a href="https://www.basemap.at">basemap.at</a>',
+            type: 'normal',
+            format: 'jpeg',
+            bounds: [[46.35877, 8.782379], [49.037872, 17.189532]]
+        }).addTo(map);
+
+    //OpenStreetmap
+    const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+    //Stadtteile als GeoJson
+    const geojson = L.geoJson(stadtteile_salzburg, {attribution: '<a href="https://www.data.gv.at/katalog/datasets/0475194b-b6b2-42be-85e5-b57a1dc0d04a">OpenData Stadt Salzbug</a> - <a href="https://creativecommons.org/licenses/by/3.0/at/">CC BY 3.0 AT</a>'}).addTo(map);
+    
+    //Struktur Pop-Up
+    geojson.eachLayer((layer) => {
+	layer.bindPopup("Stadtteil: " + iStruktur(layer.feature.properties.STADTTEIL) + " | " + "Ortsteil: " + iStruktur(layer.feature.properties.ORTSTEIL) + " | " + "Landschaftsraum: " + iStruktur(layer.feature.properties.LANDSCHAFTSRAUM) + " | " + "Teillandschaftsraum: " + iStruktur(layer.feature.properties.TEILLANDSCHAFTSRAUM) + " | " + "Siedlung: " + iStruktur(layer.feature.properties.SIEDLUNG));
+	});
+
+    //Struktur
+    function iStruktur(Struktur){
+        return Struktur != null ? Struktur : " - ";
+    }
+
+    //Layer Control
+    var baseMaps = {
+    "Basemap": basemap,
+    "OpenStreetMap": osm
+    };
+
+    var overlayMaps = {
+        "Stadtteile": geojson
+    };
+    
+    var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+
+    
+    </script>
+    </body>
+</html>
