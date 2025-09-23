@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Storymap</title>
+    <title>Storymap Alterbach</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
@@ -20,7 +20,6 @@
         width: 1200px;
         margin: 10px;
     }
-
     .side_text{
         width: 600px;
     }
@@ -42,7 +41,7 @@
         border-style: solid;
     }
 
-    #uebersicht, #infos {
+    #uebersicht, #infos, #start, #bilder {
         flex-direction: column;
     }
 
@@ -57,7 +56,7 @@
         background-image: url('img/nepomuk.png'); 
         background-repeat: no-repeat;
         background-position: center;
-        height: 100%;
+        height: 1080px;
         color: white;
         margin-bottom: 20px;
     }
@@ -87,7 +86,6 @@
         height: 10px;
         width: 15px;
     }
-
     .buttonG {
         background-color: #04AA6D; /* Green */
         border: none;
@@ -100,7 +98,6 @@
         height: 10px;
         width: 15px;
     }
-    
     .buttonN {
         background-color: grey; /* Greey */
         border: none;
@@ -123,25 +120,44 @@
 </header>
 <nav><a href="#quelle">Alterbach Ursprung</a> | <a href="#oberlauf">Alterbach Oberlauf</a> | <a href="#obergnigl">Alterbach Obergnigl</a> | <a href="#mittellauf">Alterbach Mittellauf</a> | <a href="#unterlauf">Alterbach Unterlauf</a> | <a href="#uebersicht">&Uuml;bersichtskarte</a> | <a href="#infos">Weitere Infos</a> | <a href="#bilder">Bilder</a></nav>
 
-<section>
-    Der Alterbach ist ein Bach im Bundesland Salzburg. Er flie&szligt von der Gemeinde Koppl durch die Salzburger Stadtteile Gnigl und Itzling und m&uuml;ndet in Itzling in die Salzach.
+<section id="start">
+<h2>Fakten</h2>
+<ul>
+    <li>Der Alterbach ist ein Bach im Bundesland Salzburg.</li>
+    <li>Er flie&szligt von der Gemeinde Koppl durch die Salzburger Stadtteile Gnigl und Itzling und m&uuml;ndet in Itzling in die Salzach.</li>
+    <li>Er durchflie&szlig;t die Bezirke Salzburg Umgebung und Salzburg Stadt.</li>
+    <li>Der Bach hat eine L&auml;nge von 10,5 km.</li>
+    <li>Er hat ein Einzugsgebiet von 29,7 km².</li>
+    <li>Die Quelle liegt auf 673m. Die M&uuml;ndung auf 407m. Der H&ouml;henunterschied betr&auml;gt somit 266m.</li>
+    <li>Der Bach hat mehrere Nebenb&auml;che. Die meisten Nebenb&auml;che haben aber keinen Namen.</li>
+</ul>
+<h2>Geschichte</h2>
+<p>Urspr&uuml;nglich hat es in Obergnigl mehrere M&uuml;hlen gegeben. Gnigl war bis 1935 eine eigenst&auml;ndige Gemeinde und galt, wie auch M&uuml;lln als M&uuml;hlendorf. Wegen der M&uuml;hlen aber auch der Hochw&auml;sser wurde der Alterbach im Oberlauf aber auch in Obergnigl stark verbaut.</p>
+<p>Im Unterlauf f&uuml;hrt die Plainbr&uuml;cke &uuml;ber den Alterbach. Auf dieser befindet sich eine Status des heiligen Johannes Nepomuk von Josef Anton Pfaffinger.</p>
+<div class="gallery"><a href="img/nepomuk.png" target="_blank"><img src="img/nepomuk.png" width="600px" alt="Statue" title="Nepomuk"></a></div>
 </section>
 
 <section id="quelle">
 <div id="map1" class="side_map"></div>
-<div clas="side_text">
+<div class="side_text">
     <h2>Alterbach Ursprung</h2>
-    <p>Der Ursprung des Alterbachs befindet sich in Koppl.</p>
+    <p>Der Ursprung des Alterbachs befindet sich in Koppl, an einem Nebenweg der Wolfgangsee-Bundesstra&szlig;e n&ouml;rdlich des Koppler Ortsteils Unterkoppl.</p>
+    <p>Die Quelle wurde in ein Rohr gefasst und mit einem Informations-Stein versehen.</p>
     <div class="gallery">
     <a href="img/alterbach_ursprung.png" target="_blank"><img class="img_side" src="img/alterbach_ursprung.png" /></a>
     </div>
 </div>
 </section>
 
+
+
 <section id="oberlauf">
 <div class="side_text">
     <h2>Alterbach Oberlauf</h2>
-    <p>Im Oberlauf flie&szlig;t er zwischen Heuberg und Gaisberg durch und hat mehrere kleine Zufl&uuml;sse. Dort ist er teilweise nicht verbaut und teilweise aber realtiv stark.</p>
+    <p>Im Oberlauf flie&szlig;t er zwischen Heuberg und Gaisberg durch und hat mehrere kleine Zufl&uuml;sse. Dort ist er teilweise nicht verbaut und teilweise aber realtiv stark verbaut.</p>
+    <p>Er flie&szlig;t zwischen Wiesen und Feldern hindurch und es wachsen B&auml;ume am Ufer.</p>
+    <p>Ab Guggenthal gibt es einen Weg entlang des Alterbach bis Obergnigl.</p>
+    <p>Dieser Bereich ist auch bekannt durch die "Wasserf&auml;lle" und die durch Geschiebesperren gebiledet werden.</p>
     <div class="gallery">
     <a href="img/alterbach_oberlauf.png" target="_blank"><img class="img_side" src="img/alterbach_oberlauf.png"></a>
     <a href="img/alterbach_kaskaden.png" target="_blank"><img class="img_side" src="img/alterbach_kaskaden.png"></a>
@@ -155,12 +171,16 @@
 <div class="side_text">
     <h2>Alterbach Obergnigl</h2>
     <p>In Obergnigl verl&auml;uft der Bach in einem gepflasterten Bett.</p>
+    <p>In diesem Bereich befindet sich auch noch eine letzte M&uuml;hle, die nicht direkt im Bach ist aber das Wasser aus dem Bach bezieht.</p>
+    <p>In Obergnigl gibt es keinen Weg direkt am Bach, er ist in den meisten Bereichen von H&auml;usern umgeben.</p>
 </div>
 </section>
 
 <section id="mittellauf">
-<div class="side_text"><h2>Alterbach Mittellauf</h2>
-    <p>Im Mittellauf ist er weniger reguliert aber von bebauten bzw. bewirtschafteten Fl&auml;chen umgeben. Es f&uuml;hrt ein Weg entlang. Dort flie&szlig;t auch der S&ouml;llheimer Bach zu.</p>
+<div class="side_text">
+    <h2>Alterbach Mittellauf</h2>
+    <p>Im Mittellauf ist er weniger reguliert aber von bebauten bzw. bewirtschafteten Fl&auml;chen umgeben. Dort flie&szlig;t auch der S&ouml;llheimer Bach zu. Es f&uuml;hrt ein Weg entlang.</p>
+    <p>Im Bereich Lankessiedlung gibt es einen Renaturierungsbereich.</p>
     <div class="gallery">
     <a href="img/alterbach_mittellauf.png" target="_blank"><img class="img_side" src="img/alterbach_mittellauf.png"></a>
     <a href="img/alterbach_soelheimerbach.png" target="_blank"><img class="img_side" src="img/alterbach_soelheimerbach.png"></a>
@@ -178,7 +198,12 @@
 <div id="map5" class="side_map"></div>
 <div class="side_text">
     <h2>Alterbach Unterlauf</h2>
+    <p>In diesem Bereich flie&szlig;t der Alterbach durch Itzling.</p>
     <p>Im Unterlauf gibt es zwei Fischtreppen, eine davon an der M&uuml;ndung.</p>
+    <p>Auch im Bereich Goethesiedlung gibt es einen Renaturierungsbereich.</p>
+    <p>Auch im Unterlauf gibt es Enten.</p>
+    <p>Etwas oberhalb der Fischtreppe gibt es eine Me&szlig;-Stelle:<br>
+    <a href="https://www.salzburg.gv.at/wasser/hydro/#/Fliessgew%C3%A4sser?station=203430" target="_Blank">Link</a> &#128201;</p></p>
     <div class="gallery">
     <a href="img/alterbach_unterlauf.png" target="_blank"><img class="img_side" src="img/alterbach_unterlauf.png"></a>
     <a href="img/alterbach_muendung.png" target="_blank"><img class="img_side" src="img/alterbach_muendung.png"></a>
@@ -189,6 +214,7 @@
 <section id="uebersicht">
 <h2>&Uuml;bersichtskarte</h2>
 <div id="map6" class="map"></div>
+<div>&nbsp;</div>
 <div>Alterbach <div class="buttonR" onclick="removeLayer(alterbachl);">-</div> <div class="buttonG" onclick="addLayer(alterbachl);">+</div> <div class="buttonN" onclick="zoomToAlterbach();">🔎</div></div>
 <div>Quelle <div class="buttonR" onclick="removeLayer(alterbach_quelle_ue);">-</div> <div class="buttonG" onclick="addLayer(alterbach_quelle_ue);">+</div> <div class="buttonN" onclick="zoomTo(alterbach_quelle_ue);">🔎</div></div>
 <div>M&uuml;ndung <div class="buttonR" onclick="removeLayer(alterbach_muendung_ue);">-</div> <div class="buttonG" onclick="addLayer(alterbach_muendung_ue);">+</div> <div class="buttonN" onclick="zoomTo(alterbach_muendung_ue);">🔎</div></div>
@@ -198,10 +224,13 @@
 <h2>Weitere Infos</h2>
 <ul>
     <li><a href="https://de.wikipedia.org/wiki/Alterbach">Wikipedia Artikel</a></li>
+    <li><a href="https://www.sn.at/wiki/Alterbach">Salzburg Wiki Artikel</a></li>
 </ul>
 </section>
 
-<section class="gallery" id="bilder">
+<section id="bilder">
+    <h2>Bilder</h2>
+<div class="gallery">
     <img src="img/alterbach_ursprung.png" alt="Quell-Rohr bei Koppl" title="Quelle bei Koppl">
     <img src="img/alterbach_oberlauf.png" alt="M&auml;andernder Bach im Oberlauf" title="Oberlauf">
     <img src="img/alterbach_kaskaden.png" alt="2 Kaskaden" title="Kaskaden">
@@ -211,6 +240,7 @@
     <img src="img/alterbach_enten2.png" alt="2 m&auml;nnliche Stockenten auf Steinen im Bach" title="Stockenten">
     <img src="img/alterbach_unterlauf.png" alt="Fischtreppe im Unterlauf" title="Fischtreppe">
     <img src="img/alterbach_muendung.png" alt="Fischtreppe bei M&uuml;ndung in die Salzach" title="Fischtreppe bei M&uuml;ndung in die Salzach">
+</div>
 </section>
 
 <!-- JavaScript-->
